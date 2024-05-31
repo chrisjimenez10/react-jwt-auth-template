@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignupForm from './components/SignupForm/SignupForm';
+import SigninForm from './components/SigninForm/SigninForm';
 
 const App = () => {
   //We want to declare the "user" state in the App component - This way, we make the user's authentication status accessible throughout the application --> NOTE: This central management allows us to easily pass the "user" state down to components that need it
@@ -21,6 +22,7 @@ const App = () => {
           <Route path='/' element={<Landing />} />
         )}
         <Route path='signup' element={<SignupForm setUser={setUser}/>} />
+        <Route path='signin' element={<SigninForm setUser={setUser}/>} />
       </Routes>
     </>
   )
