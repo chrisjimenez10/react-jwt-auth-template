@@ -1,5 +1,4 @@
-// SignupForm.jsx
-
+import * as authService from "../../services/authService";
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -22,8 +21,13 @@ const SignupForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    updateMessage('');
-    console.log(formData); // this line will print the form data to the console
+    try{
+      const newUserResponse = await authService.signup(formData)
+      props.setUser(newUserResponse.user); //Here, we are setting the state of "user" state variable to the actual user that signed-in --> We are returning the user object from the signup() fetch request function that we are importing from our authService.js file, so we can store it in the variable "newuserResponse" and access the user boject so we can use it in the state setter function for our "user" state in the App component
+      navigate("/"); //Redirect to the Landing Page - Since "user" state will exist, the user will se the landing page reflecting that login-in status
+    }catch(error){
+      updateMessage(error.message);
+    }
   };
 
   const { username, password, passwordConf } = formData;
